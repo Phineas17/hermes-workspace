@@ -303,6 +303,7 @@ function shouldSetSecureCookie(): boolean {
 export function createSessionCookie(token: string): string {
   const attrs = ['HttpOnly']
   if (shouldSetSecureCookie()) attrs.push('Secure')
-  attrs.push('SameSite=Strict', 'Path=/', `Max-Age=${30 * 24 * 60 * 60}`)
-  return `claude-auth=${token}; ${attrs.join('; ')}`
+  // Use SameSite=None to allow embedding in iframes (like the CRM)
+  // Note: SameSite=None requires Secure to be true, which is handled below if secure flag is set
+  attrs.push('SameSite=None', 'Path=/', `Max-Age=${30 * 24 * 60 * 60}`)  return `claude-auth=${token}; ${attrs.join('; ')}`
 }
