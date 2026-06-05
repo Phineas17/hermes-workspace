@@ -12,16 +12,17 @@
 FROM tianon/gosu:1.17-bookworm AS gosu_source
 # ─── build stage ─────────────────────────────────────────────────────────
 FROM node:22-slim AS build
-RUN corepack enable && apt-get update && apt-get install -y --no-install-recommends ca-certificates && rm -rf /var/lib/apt/lists/*
+RUN apt-get update && apt-get install -y --no-install-recommends ca-certificates && rm -rf /var/lib/apt/lists/*
+
 WORKDIR /app
 
 # Install deps (cache-friendly: copy only manifests first)
-COPY package.json pnpm-lock.yaml* ./
-RUN pnpm config set ignore-scripts false && pnpm install --frozen-lockfile
+COPY package.json ./
+RUN npm install
 
 # Copy sources and build
 COPY . .
-RUN pnpm build
+RUN npm run build
 
 # ─── runtime stage ────────────────────────────────────────────────────────
 FROM node:22-slim
