@@ -19,12 +19,7 @@
     "playground:ws": "node scripts/playground-ws.mjs",
     "lint": "eslint",
     "format": "prettier",
-    "check": "prettier --write . && eslint --fix",
-    "electron:dev": "NODE_ENV=development electron .",
-    "electron:build": "pnpm build && pnpm electron:bundle-server && electron-builder --config electron-builder.config.cjs",
-    "electron:build:mac": "pnpm build && pnpm electron:bundle-server && electron-builder --mac --config electron-builder.config.cjs",
-    "electron:build:win": "pnpm build && pnpm electron:bundle-server && electron-builder --win --config electron-builder.config.cjs",
-    "electron:bundle-server": "esbuild dist/server/server.js --bundle --platform=node --format=cjs --outfile=electron/server-bundle.cjs"
+    "check": "prettier --write . && eslint --fix"
   },
   "dependencies": {
     "@base-ui/react": "^1.1.0",
@@ -48,7 +43,6 @@
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "ecctrl": "^1.0.97",
-    "electron-updater": "^6.6.2",
     "framer-motion": "^12.36.0",
     "marked": "^17.0.1",
     "motion": "^12.29.2",
@@ -90,9 +84,6 @@
     "@types/react-dom": "^19.2.0",
     "@vitejs/plugin-react": "^5.0.4",
     "concurrently": "^8.2.2",
-    "electron": "^40.8.2",
-    "electron-builder": "^26.8.1",
-    "esbuild": "^0.27.0",
     "eslint": "^10.2.0",
     "jsdom": "^27.0.0",
     "prettier": "^3.5.3",
